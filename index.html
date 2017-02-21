@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>ArcGIS API 4 for JavaScript & Angular 2</title>
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+
+        <!-- load this app's styles -->
+        <link rel="stylesheet" href="styles.css">
+
+        <!-- load libraries -->
+        <script src="https://npmcdn.com/core-js@2.4.1/client/shim.min.js"></script>
+
+        <script src="https://npmcdn.com/zone.js@0.7.7?main=browser"></script>
+        <script src="https://npmcdn.com/reflect-metadata@0.1.9"></script>
+        <script src="https://npmcdn.com/systemjs@0.19.37/dist/system.src.js"></script>
+
+        <script src="dojoConfig.js"></script>
+
+        <!-- load Esri library -->
+        <script src="https://js.arcgis.com/4.3/"></script>
+
+        <!-- load esri-system-js library -->
+        <script src="//npmcdn.com/esri-system-js@1.0.0-beta.0/dist/esriSystem.js"></script>
+        
+        <!-- configure SystemJS -->
+        <script src="systemjs.config.js"></script>
+
+    </head>
+    
+    <!-- display the application -->
+    <body>
+        <my-app>Loading...</my-app>
+
+        <!-- using esri-system-js: load Esri modules and then bootstrap the app -->
+    <script>
+    // configure system.js
+    System.config({
+    packages: {
+        app: {
+        defaultExtension: 'js'
+        }
+    }
+    });
+
+    // load esri modules needed by this application
+    // and then regsiter each as it's own SystemJS module
+    esriSystem.register(
+    // array of Esri module names to load and then register with SystemJS
+    [
+        'esri/Map',
+        'esri/views/SceneView',
+        'esri/layers/FeatureLayer'
+    ],
+
+    // optional callback function
+    function() {
+        // then bootstrap application
+        System.import('app/main')
+        .then(null, console.error.bind(console));
+    });
+    </script>
+    </body>
+</html>
